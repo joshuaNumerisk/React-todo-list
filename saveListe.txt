@@ -1,0 +1,65 @@
+import React, { useEffect, useState } from "react";
+
+const Liste = () => {
+  const [listeTaches, setListeTaches] = useState([]);
+
+  const ajouterTache = () => {
+    setListeTaches([
+      ...listeTaches,
+      {
+        texteAfaire: "Faire fonctionner le bouton",
+        statut: "A faire",
+      },
+    ]);
+  };
+
+  const modifierTache = (index) => {
+    debugger;
+    const tempList = [...listeTaches];
+    tempList[index].texteAfaire = "texte modifié";
+    setListeTaches(tempList);
+  };
+  const supprimerTache = (index) => {
+    debugger;
+    const tempList = [...listeTaches];
+    tempList.splice(index, 1);
+    setListeTaches(tempList);
+  };
+
+  return (
+    <>
+      <form>
+        <label>
+          Tache :
+          <input type="text" value={setListeTaches} />
+        </label>
+        <label>
+          Statut de la tâche :
+          <select>
+            <option value="A faire">A faire</option>
+            <option value="Fait">Fait</option>
+          </select>
+        </label>
+        <input type="submit" value="Envoyer" />
+      </form>
+      <button onClick={() => ajouterTache()}>Ajouter une tache</button>
+      {listeTaches.map((tache, index) => {
+        return (
+          <div key={index}>
+            <div>{tache.texteAfaire}</div>
+            <div>{tache.statut}</div>
+
+            <button onClick={() => modifierTache(index)}>
+              Modifier une Tache
+            </button>
+            <button onClick={() => supprimerTache(index)}>
+              Supprimer une Tache
+            </button>
+          </div>
+        );
+      })}
+    </>
+  );
+};
+
+export default Liste;
